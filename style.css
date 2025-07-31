@@ -1,5 +1,13 @@
-.container {
+body {
+  gap: 10px;
+  box-sizing: border-box;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.canvas {
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
@@ -13,9 +21,16 @@
 }
 
 .row {
-  width: 1px;
-  height: 1px;
+  width: 16px;
+  height: 16px;
   flex: auto;
   background-color: blue;
-  border: 5px red solid;
+}
+
+.row:hover {
+  background-color: red;
+}
+
+.painted {
+  background-color: black;
 }
