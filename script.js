@@ -1,19 +1,19 @@
 let gridSize = 16;
 let drawingMode/*'pen' | 'eraser'*/ = 'pen';
+const container = document.querySelector(".canvas");
 
 document.getElementById("reset").addEventListener("click", () => {
   if (confirm("Are you sure you want to clear everything you drew do far?")) {
-    // do the grid cleanup
-
-    //
 
     gridSize = prompt("Please, inform a new grid size in pixels. (16 = 16px by 16px grid, 32 = 32px by 32px grid");
+
+    // do the grid cleanup
+    // generateGrid(gridSize, container)
+    //
   }
 });
 
-const container = document.querySelector(".canvas");
-
-generateGrid(gridSize);
+generateGrid(gridSize, container);
 
 // HTML5's drag events breaks this kind of app, and there's no easier/better way for disabling it other than the code below
 ['dragstart', 'drag', 'dragover', 'dragenter', 'dragleave', 'drop', 'dragend'].forEach(eventType => {
@@ -23,29 +23,31 @@ generateGrid(gridSize);
   }, { passive: false }); // passive: false needed for preventDefault to work in some browsers
 });
 
-const handleDrawing = (e) => {
-  console.log(e);
-  if (!(e.target.className.includes("painted")) && drawingMode === "pen") {
-    e.target.setAttribute("class", "row painted");
-    return;
-  }
-
-  if (e.target.className.includes("painted") && drawingMode === "eraser") {
-    e.target.setAttribute("class", "row");
-    return;
-  }
-};
-
 document.addEventListener("mousedown", (e) => {
+  console.log(e.target.id);
   if (e.target.className.includes("row")) handleDrawing(e);
   container.addEventListener("mousemove", handleDrawing);
 });
 
 document.addEventListener("mouseup", (e) => {
   container.removeEventListener("mousemove", handleDrawing);
+  if (e.target.className === "tool") drawingMode = e.target.id;
 });
 
-function generateGrid(gridSize) {
+function handleDrawing(event) {
+  block = event.target;
+  if (!(block.className.includes("painted")) && drawingMode === "pen") {
+    block.setAttribute("class", "row painted");
+    return;
+  }
+
+  if (block.className.includes("painted") && drawingMode === "eraser") {
+    block.setAttribute("class", "row");
+    return;
+  }
+};
+
+function generateGrid(gridSize, container) {
   for (let i = 1;i <= gridSize;i++) {
     const colBlock = document.createElement("div");
     colBlock.setAttribute("class", "col-wrapper");
