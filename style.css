@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+}
+
+.row {
+  width: 1px;
+  height: 1px;
+  flex: auto;
+  background-color: blue;
+  border: 5px red solid;
+}
