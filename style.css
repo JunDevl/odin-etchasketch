@@ -1,3 +1,8 @@
+:root {
+  --canvas-color: "blue";
+  --canvas-hover-color: "red";
+}
+
 body {
   gap: 10px;
   box-sizing: border-box;
@@ -11,6 +16,9 @@ body {
   position: relative;
   justify-content: center;
   align-items: center;
+  border: 1px black solid;
+  border-radius: 5px;
+  pointer-events: none;
 }
 
 .col-wrapper {
@@ -19,17 +27,19 @@ body {
   justify-content: center;
   align-items: center;
   flex: auto;
+  pointer-events: none;
 }
 
 .row {
   width: 16px;
   height: 16px;
   flex: auto;
-  background-color: blue;
+  box-sizing: border-box;
+  pointer-events: all;
 }
 
 .row:hover {
-  background-color: red;
+  border: 3px red solid;
 }
 
 .painted {
@@ -43,9 +53,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 5px;
+  gap: 5px;
+  padding: 5px;
+  border-bottom-right-radius: 5px;
   background-color: white;
 }
 
